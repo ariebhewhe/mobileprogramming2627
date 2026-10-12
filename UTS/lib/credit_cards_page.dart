@@ -151,8 +151,20 @@ class CreditCardsPage extends StatelessWidget {
     // secara manual agar gambar tidak pecah atau overflow (terpotong).
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        // KODE GAMBAR ANDA DI SINI
+        Image.asset(
+          'assets/images/contact_less.png',
+          width: 28.0,
+          height: 28.0,
+          fit: BoxFit.contain,
+        ),
+        Image.asset(
+          'assets/images/mastercard.png',
+          width: 52.0,
+          height: 32.0,
+          fit: BoxFit.contain,
+        ),
       ],
     );
   }
