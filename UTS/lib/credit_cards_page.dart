@@ -8,21 +8,22 @@ class CreditCardsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     // TODO 2: BUAT LOGIKA KONDISIONAL BERDASARKAN NIM!
     // Aturan:
     // - Jika digit terakhir NIM Anda Ganjil: warnaKartu1 = Biru (0xFF090943), warnaKartu2 = Merah.
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
-    if (nimMahasiswa % 2 !=0 ){
-      //ganjil
-    Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
-     Color warnaKartu2 = Color(0xFFFF0000); // <- Ubah agar dinamis menggunakan logika IF
-    }else
-      //genap
-    Color warnaKartu1 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
-    Color warnaKartu2 = Color(0xFF00FF22); // <- Ubah agar dinamis menggunakan logika IF
-    
+    final int nim = int.parse(nimMahasiswa);
+final bool nimGanjil = nim % 2 != 0;
+
+final Color warnaKartu1 = nimGanjil
+    ? const Color(0xFF090943)
+    : const Color(0xFF000000);
+
+final Color warnaKartu2 = nimGanjil
+    ? const Color(0xFFFF0000)
+    : const Color(0xFF00FF22);
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(8.0),
