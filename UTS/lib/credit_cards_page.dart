@@ -110,11 +110,41 @@ class CreditCardsPage extends StatelessWidget {
     // TODO 4: Bangun UI kartu kredit di sini.
     // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
     return Card(
+      elevation: 4.0,
       color: color,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
+      ),
       child: Container(
         height: 200,
-        // KODE UI ANDA DI SINI
-        child: const Center(child: Text("UI Kartu belum dibuat...")),
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 22.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            _buildLogosBlock(),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                cardNumber,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 21,
+                    fontFamily: 'CourrierPrime'),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _buildDetailsBlock(
+                  label: 'CARDHOLDER',
+                  value: cardHolder,
+                ),
+                _buildDetailsBlock(label: 'VALID THRU', value: cardExpiration),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
