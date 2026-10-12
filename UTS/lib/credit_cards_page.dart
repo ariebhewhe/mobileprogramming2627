@@ -14,9 +14,19 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Ganjil: warnaKartu1 = Biru (0xFF090943), warnaKartu2 = Merah.
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
-    
-    Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
-    Color warnaKartu2 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
+    final int digitTerakhir =
+        int.parse(nimMahasiswa[nimMahasiswa.length - 1]);
+    late Color warnaKartu1;
+    late Color warnaKartu2;
+    if (digitTerakhir % 2 == 1) {
+      // Ganjil: Biru dan Merah
+      warnaKartu1 = const Color(0xFF090943);
+      warnaKartu2 = Colors.red;
+    } else {
+      // Genap: Hitam dan Hijau
+      warnaKartu1 = const Color(0xFF000000);
+      warnaKartu2 = Colors.green;
+    }
 
     return SingleChildScrollView(
       child: Container(
