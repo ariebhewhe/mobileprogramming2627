@@ -105,18 +105,44 @@ Card _buildCreditCard(
     required String cardHolder,
     required String cardExpiration}) {
   // TODO 4: Bangun UI kartu kredit di sini.
-  // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
-  return Card(
-    color: color,
-    child: Container(
-      height: 200,
-      // KODE UI ANDA DI SINI
-      child: const Center(child: Text("UI Kartu belum dibuat...")),
-    ),
-  );
-}
+    // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
+    return Card(
+      color: color,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Container(
+        height: 200,
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
 
-// buat  top row containing logo
+        // KODE UI ANDA DI SINI
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            _buildLogosBlock(),
+
+            Text(
+              cardNumber,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                letterSpacing: 2,
+              ),
+            ),
+
+            _buildDetailsBlock(
+              cardHolder: cardHolder,
+              cardExpiration: cardExpiration,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // buat top row containing logo
 Row _buildLogosBlock() {
   // TODO 5: Panggil asset gambar lokal "contact_less.png" dan "mastercard.png".
   // CATATAN: Atur posisi sejajar berlawanan (kiri dan kanan).
