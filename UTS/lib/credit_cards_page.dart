@@ -15,6 +15,9 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
     
+    Color warnaKartu1 = Color(0xFF090943);
+    Color warnaKartu2 = Color(0xFF000000);
+
     if (int.parse(nimMahasiswa.substring(nimMahasiswa.length - 1)) % 2 == 1){
     Color warnaKartu1 = Color(0xFF090943);
     } else {// <- Ubah agar dinamis menggunakan logika IF
@@ -47,10 +50,10 @@ class CreditCardsPage extends StatelessWidget {
                 cardHolder: namaMahasiswa,
                 cardNumber: "9874 4785 XXXX 6548"),
             
-            _buildAddCardButton(
-              icon: const Icon(Icons.add),
-              color: const Color(0xFF081603),
-            )
+            // _buildAddCardButton(
+            //   icon: const Icon(Icons.add),
+            //   color: const Color(0xFF081603),
+            // )
 
           ],
         ),
@@ -75,12 +78,24 @@ class CreditCardsPage extends StatelessWidget {
         // padding 1 
         Padding(
             padding: const EdgeInsets.only(),
-
+            child: Text(
+              'Rincian pembayaran',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold, 
+              ),
+            )
         ),
         // padding 2
         Padding(
             padding: const EdgeInsets.only(),
-
+            child: Text(
+              'Bagaimana Anda ingin membayar?',
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.grey, 
+              ),
+            )
         ),
       ],
     );
