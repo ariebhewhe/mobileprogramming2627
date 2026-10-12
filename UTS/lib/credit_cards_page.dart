@@ -80,16 +80,21 @@ class CreditCardsPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // KODE UI ANDA DI SINI
-        // padding 1 
+        // padding 1
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
         ),
         // padding 2
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(left: 8.0, bottom: 16.0),
+          child: Text(
+            subTitle,
+            style: const TextStyle(fontSize: 21, color: Colors.black45),
+          ),
         ),
       ],
     );
