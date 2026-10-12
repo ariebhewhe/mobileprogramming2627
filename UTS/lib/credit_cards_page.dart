@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CreditCardsPage extends StatelessWidget {
   
   // TODO 1: GANTI VARIABEL INI DENGAN DATA DIRI ANDA
-  final String namaMahasiswa = "NAMA LENGKAP ANDA"; // Jangan biarkan kosong!
-  final String nimMahasiswa = "NIM ANDA"; // Jangan biarkan kosong!
+  final String namaMahasiswa = "Christian Winata"; // Jangan biarkan kosong!
+  final String nimMahasiswa = "20245520010"; // Jangan biarkan kosong!
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,19 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Ganjil: warnaKartu1 = Biru (0xFF090943), warnaKartu2 = Merah.
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
-    
-    Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
-    Color warnaKartu2 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
+    final int digitTerakhir =
+        int.parse(nimMahasiswa[nimMahasiswa.length - 1]);
+    late Color warnaKartu1;
+    late Color warnaKartu2;
+    if (digitTerakhir % 2 == 1) {
+      // Ganjil: Biru dan Merah
+      warnaKartu1 = const Color(0xFF090943);
+      warnaKartu2 = Colors.red;
+    } else {
+      // Genap: Hitam dan Hijau
+      warnaKartu1 = const Color(0xFF000000);
+      warnaKartu2 = Colors.green;
+    }
 
     return SingleChildScrollView(
       child: Container(
@@ -67,15 +77,32 @@ class CreditCardsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // KODE UI ANDA DI SINI
-        // padding 1 
+        // padding 1
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(top: 16.0, left: 8.0, right: 8.0),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 22.0,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
         ),
         // padding 2
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(
+              top: 4.0, bottom: 16.0, left: 8.0, right: 8.0),
+          child: Text(
+            subTitle,
+            style: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 16.0,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey,
+            ),
+          ),
         ),
       ],
     );
@@ -92,10 +119,26 @@ class CreditCardsPage extends StatelessWidget {
     // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
     return Card(
       color: color,
+      elevation: 4.0,
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
       child: Container(
         height: 200,
-        // KODE UI ANDA DI SINI
-        child: const Center(child: Text("UI Kartu belum dibuat...")),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildLogosBlock(),
+            const Spacer(),
+            _buildDetailsBlock(
+              cardNumber: cardNumber,
+              cardHolder: cardHolder,
+              cardExpiration: cardExpiration,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -108,13 +151,116 @@ class CreditCardsPage extends StatelessWidget {
     // secara manual agar gambar tidak pecah atau overflow (terpotong).
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        // KODE GAMBAR ANDA DI SINI
+        Image.asset(
+          'assets/images/contact_less.png',
+          width: 28.0,
+          height: 28.0,
+          fit: BoxFit.contain,
+        ),
+        Image.asset(
+          'assets/images/mastercard.png',
+          width: 52.0,
+          height: 32.0,
+          fit: BoxFit.contain,
+        ),
       ],
     );
   }
   // buat Column berisi kontainer dan Informasi
+  Column _buildDetailsBlock({
+    required String cardNumber,
+    required String cardHolder,
+    required String cardExpiration,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          cardNumber,
+          style: const TextStyle(
+            fontFamily: 'CourrierPrime',
+            fontSize: 18.0,
+            letterSpacing: 2.0,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 12.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'CARD HOLDER',
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 10.0,
+                    letterSpacing: 1.0,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  cardHolder.toUpperCase(),
+                  style: const TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'EXPIRES',
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 10.0,
+                    letterSpacing: 1.0,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  cardExpiration,
+                  style: const TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   // buat   FloatingActionButton
-  
+  Widget _buildAddCardButton({required Icon icon, required Color color}) {
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.only(top: 16.0),
+        width: 52.0,
+        height: 52.0,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(14.0),
+        ),
+        child: Icon(
+          icon.icon,
+          color: Colors.white,
+          size: 28.0,
+        ),
+      ),
+    );
+  }
+
   // Build Column
+}
