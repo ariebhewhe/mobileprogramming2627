@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CreditCardsPage extends StatelessWidget {
-  
   // TODO 1: GANTI VARIABEL INI DENGAN DATA DIRI ANDA
   final String namaMahasiswa = "Jonathan Sutanto"; // Jangan biarkan kosong!
   final String nimMahasiswa = "20245520005"; // Jangan biarkan kosong!
@@ -14,15 +13,13 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
     final int nim = int.parse(nimMahasiswa);
-final bool nimGanjil = nim % 2 != 0;
+    final bool nimGanjil = nim % 2 != 0;
 
-final Color warnaKartu1 = nimGanjil
-    ? const Color(0xFF090943)
-    : const Color(0xFF000000);
+    final Color warnaKartu1 =
+        nimGanjil ? const Color(0xFF090943) : const Color(0xFF000000);
 
-final Color warnaKartu2 = nimGanjil
-    ? const Color(0xFFFF0000)
-    : const Color(0xFF00FF22);
+    final Color warnaKartu2 =
+        nimGanjil ? const Color(0xFFFF0000) : const Color(0xFF00FF22);
 
     return SingleChildScrollView(
       child: Container(
@@ -33,23 +30,23 @@ final Color warnaKartu2 = nimGanjil
             _buildTitleSection(
                 title: "Rincian pembayaran",
                 subTitle: "Bagaimana Anda ingin membayar?"),
-            
+
             _buildCreditCard(
-                color: warnaKartu1, 
+                color: warnaKartu1,
                 cardExpiration: "08/2026",
                 cardHolder: namaMahasiswa, // Menggunakan variabel nama
                 cardNumber: nimMahasiswa), // Menggunakan variabel NIM
-            
+
             const SizedBox(
               height: 15,
             ),
-            
+
             _buildCreditCard(
                 color: warnaKartu2,
                 cardExpiration: "05/2027",
                 cardHolder: namaMahasiswa,
                 cardNumber: "9874 4785 XXXX 6548"),
-            
+
             _buildAddCardButton(
               icon: const Icon(Icons.add),
               color: const Color(0xFF081603),
@@ -73,54 +70,67 @@ final Color warnaKartu2 = nimGanjil
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // KODE UI ANDA DI SINI
-        // padding 1 
+        // padding 1
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(top: 20, bottom: 8),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
+
         // padding 2
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Text(
+            subTitle,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
         ),
       ],
     );
   }
+}
 
-  // Build the credit card widget
-  Card _buildCreditCard({ 
-      required Color color,
-      required String cardNumber,
-      required String cardHolder,
-      required String cardExpiration }) {
-    
-    // TODO 4: Bangun UI kartu kredit di sini.
-    // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
-    return Card(
-      color: color,
-      child: Container(
-        height: 200,
-        // KODE UI ANDA DI SINI
-        child: const Center(child: Text("UI Kartu belum dibuat...")),
-      ),
-    );
-  }
+// Build the credit card widget
+Card _buildCreditCard(
+    {required Color color,
+    required String cardNumber,
+    required String cardHolder,
+    required String cardExpiration}) {
+  // TODO 4: Bangun UI kartu kredit di sini.
+  // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
+  return Card(
+    color: color,
+    child: Container(
+      height: 200,
+      // KODE UI ANDA DI SINI
+      child: const Center(child: Text("UI Kartu belum dibuat...")),
+    ),
+  );
+}
 
-  // buat  top row containing logo
-  Row _buildLogosBlock() {
-    // TODO 5: Panggil asset gambar lokal "contact_less.png" dan "mastercard.png".
-    // CATATAN: Atur posisi sejajar berlawanan (kiri dan kanan). 
-    // AI teks tidak tahu dimensi resolusi asli gambar ini. Anda harus mengatur nilai width dan height 
-    // secara manual agar gambar tidak pecah atau overflow (terpotong).
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        // KODE GAMBAR ANDA DI SINI
-      ],
-    );
-  }
-  // buat Column berisi kontainer dan Informasi
+// buat  top row containing logo
+Row _buildLogosBlock() {
+  // TODO 5: Panggil asset gambar lokal "contact_less.png" dan "mastercard.png".
+  // CATATAN: Atur posisi sejajar berlawanan (kiri dan kanan).
+  // AI teks tidak tahu dimensi resolusi asli gambar ini. Anda harus mengatur nilai width dan height
+  // secara manual agar gambar tidak pecah atau overflow (terpotong).
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      // KODE GAMBAR ANDA DI SINI
+    ],
+  );
+}
+// buat Column berisi kontainer dan Informasi
 
-  // buat   FloatingActionButton
-  
-  // Build Column
+// buat   FloatingActionButton
+
+// Build Column
