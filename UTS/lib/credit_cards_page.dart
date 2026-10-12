@@ -119,10 +119,26 @@ class CreditCardsPage extends StatelessWidget {
     // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
     return Card(
       color: color,
+      elevation: 4.0,
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
       child: Container(
         height: 200,
-        // KODE UI ANDA DI SINI
-        child: const Center(child: Text("UI Kartu belum dibuat...")),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildLogosBlock(),
+            const Spacer(),
+            _buildDetailsBlock(
+              cardNumber: cardNumber,
+              cardHolder: cardHolder,
+              cardExpiration: cardExpiration,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -141,7 +157,78 @@ class CreditCardsPage extends StatelessWidget {
     );
   }
   // buat Column berisi kontainer dan Informasi
+  Column _buildDetailsBlock({
+    required String cardNumber,
+    required String cardHolder,
+    required String cardExpiration,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          cardNumber,
+          style: const TextStyle(
+            fontFamily: 'CourrierPrime',
+            fontSize: 18.0,
+            letterSpacing: 2.0,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 12.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'Card Holder',
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 12.0,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  cardHolder,
+                  style: const TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'Expires',
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 12.0,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  cardExpiration,
+                  style: const TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   // buat   FloatingActionButton
   
   // Build Column
+}
