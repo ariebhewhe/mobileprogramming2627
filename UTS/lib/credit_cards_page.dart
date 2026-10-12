@@ -50,10 +50,10 @@ class CreditCardsPage extends StatelessWidget {
                 cardHolder: namaMahasiswa,
                 cardNumber: "9874 4785 XXXX 6548"),
             
-            // _buildAddCardButton(
-            //   icon: const Icon(Icons.add),
-            //   color: const Color(0xFF081603),
-            // )
+            _buildAddCardButton(
+              icon: const Icon(Icons.add),
+              color: const Color(0xFF081603),
+            )
 
           ],
         ),
@@ -113,9 +113,36 @@ class CreditCardsPage extends StatelessWidget {
     return Card(
       color: color,
       child: Container(
-        height: 200,
+      height: 200,
         // KODE UI ANDA DI SINI
-        child: const Center(child: Text("UI Kartu belum dibuat...")),
+        child: Row(
+          children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildLogosBlock(),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildDetailsBlock(
+                  cardNumber, 
+                  cardHolder, 
+                  cardExpiration),
+              ],
+            ),
+          ),
+          Container(
+            child: const Center(child: Text("UI Kartu belum dibuat...")),
+          ),
+        ],
+      ),
       ),
     );
   }
@@ -133,8 +160,15 @@ class CreditCardsPage extends StatelessWidget {
       ],
     );
   }
+  
   // buat Column berisi kontainer dan Informasi
+  Column _buildDetailsBlock(String cardNumber, String cardHolder, String cardExpiration) {
+    return Column(
+      children: [
 
+      ],
+    );
+  }
   // buat   FloatingActionButton
   
   // Build Column
