@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CreditCardsPage extends StatelessWidget {
   
   // TODO 1: GANTI VARIABEL INI DENGAN DATA DIRI ANDA
-  final String namaMahasiswa = "NAMA LENGKAP ANDA"; // Jangan biarkan kosong!
-  final String nimMahasiswa = "NIM ANDA"; // Jangan biarkan kosong!
+  final String namaMahasiswa = "KANIA VALENCIUS HOKMAN"; // Jangan biarkan kosong!
+  final String nimMahasiswa = "20245520002"; // Jangan biarkan kosong!
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,11 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
     
-    Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
-    Color warnaKartu2 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
+    if (int.parse(nimMahasiswa.substring(nimMahasiswa.Length - 1)) % 2 == 1){
+    Color warnaKartu1 = Color(0xFF090943);
+    } else {// <- Ubah agar dinamis menggunakan logika IF
+    Color warnaKartu2 = Color(0xFF000000);
+    } 
 
     return SingleChildScrollView(
       child: Container(
@@ -48,10 +51,12 @@ class CreditCardsPage extends StatelessWidget {
               icon: const Icon(Icons.add),
               color: const Color(0xFF081603),
             )
+
           ],
         ),
       ),
     );
+  }
   }
 
   // ===========================================================================
