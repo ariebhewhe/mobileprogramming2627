@@ -77,15 +77,32 @@ class CreditCardsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // KODE UI ANDA DI SINI
-        // padding 1 
+        // padding 1
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(top: 16.0, left: 8.0, right: 8.0),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 22.0,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
         ),
         // padding 2
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(
+              top: 4.0, bottom: 16.0, left: 8.0, right: 8.0),
+          child: Text(
+            subTitle,
+            style: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 16.0,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey,
+            ),
+          ),
         ),
       ],
     );
