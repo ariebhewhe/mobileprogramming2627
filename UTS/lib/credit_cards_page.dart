@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CreditCardsPage extends StatelessWidget {
   
   // TODO 1: GANTI VARIABEL INI DENGAN DATA DIRI ANDA
-  final String namaMahasiswa = "NAMA LENGKAP ANDA"; // Jangan biarkan kosong!
-  final String nimMahasiswa = "NIM ANDA"; // Jangan biarkan kosong!
+  final String namaMahasiswa = "Vanesson Ryouji"; // Jangan biarkan kosong!
+  final String nimMahasiswa = "20245520003"; // Jangan biarkan kosong!
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,16 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
     
-    Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
-    Color warnaKartu2 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
+    
+      int LastNim = int.tryParse(nimMahasiswa) ?? 0;
+        if  (LastNim % 2 != 0) { 
+          Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
+          Color warnaKartu2 = Color.fromARGB(255, 86, 11, 11); // <- Ubah agar dinamis menggunakan logika IF
+          } else {
+            Color warnaKartu1 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
+            Color warnaKartu2 = Color.fromARGB(255, 16, 60, 11); // <- Ubah agar dinamis menggunakan logika IF
+          } 
+    
 
     return SingleChildScrollView(
       child: Container(
@@ -66,16 +74,27 @@ class CreditCardsPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // KODE UI ANDA DI SINI
-        // padding 1 
+        //padding1
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-        // padding 2
+        //padding2
         Padding(
-            padding: const EdgeInsets.only(),
-
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: Text(
+            subTitle,
+            style: const TextStyle(
+              fontSize: 16.0,
+              color: Colors.black54,
+            ),
+          ),
         ),
       ],
     );
@@ -90,6 +109,8 @@ class CreditCardsPage extends StatelessWidget {
     
     // TODO 4: Bangun UI kartu kredit di sini.
     // Wajib memanggil fungsi _buildLogosBlock() dan _buildDetailsBlock() di dalamnya.
+    
+
     return Card(
       color: color,
       child: Container(
@@ -98,6 +119,11 @@ class CreditCardsPage extends StatelessWidget {
         child: const Center(child: Text("UI Kartu belum dibuat...")),
       ),
     );
+  }
+
+  _buildAddCardButton(){
+    Icon;
+    Color;
   }
 
   // buat  top row containing logo
@@ -118,3 +144,4 @@ class CreditCardsPage extends StatelessWidget {
   // buat   FloatingActionButton
   
   // Build Column
+}
