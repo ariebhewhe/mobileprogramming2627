@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CreditCardsPage extends StatelessWidget {
   
   // TODO 1: GANTI VARIABEL INI DENGAN DATA DIRI ANDA
-  final String namaMahasiswa = "NAMA LENGKAP ANDA"; // Jangan biarkan kosong!
-  final String nimMahasiswa = "NIM ANDA"; // Jangan biarkan kosong!
+  final String namaMahasiswa = "Njoo Christopher Harijanto"; // Jangan biarkan kosong!
+  final String nimMahasiswa = "20245520016"; // Jangan biarkan kosong!
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,17 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Ganjil: warnaKartu1 = Biru (0xFF090943), warnaKartu2 = Merah.
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
+      // penentuan ganjil/genap
+      // string ke int
+      Color warnaKartu1;
+      Color warnaKartu2;
+      String digitTerakhir = nimMahasiswa.substring(nimMahasiswa.length -2);
+        int digitTerakhir = int.tryParse(digitTerakhirString) ?? 0;
+        if(digitTerakhir % 2 !=0){
+      
+        } else {
     
+        }
     Color warnaKartu1 = Color(0xFF090943); // <- Ubah agar dinamis menggunakan logika IF
     Color warnaKartu2 = Color(0xFF000000); // <- Ubah agar dinamis menggunakan logika IF
 
@@ -47,7 +57,7 @@ class CreditCardsPage extends StatelessWidget {
             _buildAddCardButton(
               icon: const Icon(Icons.add),
               color: const Color(0xFF081603),
-            )
+            ),
           ],
         ),
       ),
@@ -69,12 +79,12 @@ class CreditCardsPage extends StatelessWidget {
         // KODE UI ANDA DI SINI
         // padding 1 
         Padding(
-            padding: const EdgeInsets.only(),
+            padding: const EdgeInsets.only(2.0),
 
         ),
         // padding 2
         Padding(
-            padding: const EdgeInsets.only(),
+            padding: const EdgeInsets.only(2.0),
 
         ),
       ],
@@ -94,7 +104,9 @@ class CreditCardsPage extends StatelessWidget {
       color: color,
       child: Container(
         height: 200,
-        // KODE UI ANDA DI SINI
+        String: cardNumber;
+        String: cardHolder;
+        String: cardExpiration;
         child: const Center(child: Text("UI Kartu belum dibuat...")),
       ),
     );
@@ -108,9 +120,31 @@ class CreditCardsPage extends StatelessWidget {
     // secara manual agar gambar tidak pecah atau overflow (terpotong).
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        // KODE GAMBAR ANDA DI SINI
-      ],
+      children: children;
+      var children = <Widget>[
+        const Logo: contact_less.png
+        const Logo: mastercard.png// KODE GAMBAR ANDA DI SINI
+      ];
+    );
+  }
+
+  Container _buildAddCardButton() {
+    home: Scaffold(
+      myApp: MyApp()(
+        leading: icon;
+        actions<Widget>[
+          IconButton (
+            icon: Icon(Icons.account_plus),
+              onPressed: () {
+
+            },
+          ),
+          Color<widget>[
+            const color: Colors.black;
+            const color: Colors.red;
+          ],
+        ],
+      ),
     );
   }
   // buat Column berisi kontainer dan Informasi
@@ -118,3 +152,4 @@ class CreditCardsPage extends StatelessWidget {
   // buat   FloatingActionButton
   
   // Build Column
+}
