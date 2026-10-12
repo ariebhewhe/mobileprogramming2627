@@ -142,21 +142,108 @@ Card _buildCreditCard(
     );
   }
 
-  // buat top row containing logo
-Row _buildLogosBlock() {
-  // TODO 5: Panggil asset gambar lokal "contact_less.png" dan "mastercard.png".
-  // CATATAN: Atur posisi sejajar berlawanan (kiri dan kanan).
-  // AI teks tidak tahu dimensi resolusi asli gambar ini. Anda harus mengatur nilai width dan height
-  // secara manual agar gambar tidak pecah atau overflow (terpotong).
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      // KODE GAMBAR ANDA DI SINI
-    ],
-  );
-}
-// buat Column berisi kontainer dan Informasi
+  Row _buildLogosBlock() {
+    // TODO 5: Panggil asset gambar lokal "contact_less.png" dan "mastercard.png".
+    // CATATAN: Atur posisi sejajar berlawanan (kiri dan kanan).
+    // AI teks tidak tahu dimensi resolusi asli gambar ini. Anda harus mengatur nilai width dan height
+    // secara manual agar gambar tidak pecah atau overflow (terpotong).
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        // KODE GAMBAR ANDA DI SINI
+        const Icon(
+          Icons.contactless,
+          color: Colors.white,
+          size: 32,
+        ),
+        const Icon(
+          Icons.credit_card,
+          color: Colors.white,
+          size: 36,
+        ),
+      ],
+    );
+  }
 
-// buat   FloatingActionButton
+  // buat Column berisi kontainer dan Informasi
+  Column _buildDetailsBlock({
+    required String cardHolder,
+    required String cardExpiration,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text(
+                    'CARD HOLDER',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 10,
+                    ),
+                  ),
+                  Text(
+                    cardHolder,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'EXPIRES',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 10,
+                  ),
+                ),
+                Text(
+                  cardExpiration,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
-// Build Column
+  // buat FloatingActionButton
+  Widget _buildAddCardButton({
+    required Icon icon,
+    required Color color,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: SizedBox(
+        width: double.infinity,
+        child: OutlinedButton.icon(
+          onPressed: () {},
+          icon: icon,
+          label: const Text('Tambah Kartu'),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: color,
+            side: BorderSide(color: color),
+            padding: const EdgeInsets.all(14),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Build Column
