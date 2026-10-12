@@ -15,7 +15,7 @@ class CreditCardsPage extends StatelessWidget {
     // - Jika digit terakhir NIM Anda Genap: warnaKartu1 = Hitam (0xFF000000), warnaKartu2 = Hijau.
     // (Silakan tulis kode logika if-else Anda di sini sebelum return)
     
-    if (int.parse(nimMahasiswa.substring(nimMahasiswa.Length - 1)) % 2 == 1){
+    if (int.parse(nimMahasiswa.substring(nimMahasiswa.length - 1)) % 2 == 1){
     Color warnaKartu1 = Color(0xFF090943);
     } else {// <- Ubah agar dinamis menggunakan logika IF
     Color warnaKartu2 = Color(0xFF000000);
