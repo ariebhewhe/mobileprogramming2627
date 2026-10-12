@@ -194,15 +194,16 @@ class CreditCardsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  'Card Holder',
+                  'CARD HOLDER',
                   style: TextStyle(
                     fontFamily: 'Lato',
-                    fontSize: 12.0,
+                    fontSize: 10.0,
+                    letterSpacing: 1.0,
                     color: Colors.white70,
                   ),
                 ),
                 Text(
-                  cardHolder,
+                  cardHolder.toUpperCase(),
                   style: const TextStyle(
                     fontFamily: 'Lato',
                     fontSize: 14.0,
@@ -216,10 +217,11 @@ class CreditCardsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  'Expires',
+                  'EXPIRES',
                   style: TextStyle(
                     fontFamily: 'Lato',
-                    fontSize: 12.0,
+                    fontSize: 10.0,
+                    letterSpacing: 1.0,
                     color: Colors.white70,
                   ),
                 ),
@@ -241,6 +243,24 @@ class CreditCardsPage extends StatelessWidget {
   }
 
   // buat   FloatingActionButton
-  
+  Widget _buildAddCardButton({required Icon icon, required Color color}) {
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.only(top: 16.0),
+        width: 52.0,
+        height: 52.0,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(14.0),
+        ),
+        child: Icon(
+          icon.icon,
+          color: Colors.white,
+          size: 28.0,
+        ),
+      ),
+    );
+  }
+
   // Build Column
 }
