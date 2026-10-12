@@ -115,7 +115,7 @@ class CreditCardsPage extends StatelessWidget {
       child: Container(
       height: 200,
         // KODE UI ANDA DI SINI
-        child: Row(
+        child: Column(
           children: [
           Container(
             padding: const EdgeInsets.all(16.0),
