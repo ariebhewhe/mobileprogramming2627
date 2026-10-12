@@ -138,9 +138,9 @@ class CreditCardsPage extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            child: const Center(child: Text("UI Kartu belum dibuat...")),
-          ),
+          // Container(
+          //   child: const Center(child: Text("UI Kartu belum dibuat...")),
+          // ),
         ],
       ),
       ),
@@ -157,8 +157,8 @@ class CreditCardsPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // KODE GAMBAR ANDA DI SINI
-        Image.asset('assets/contact_less.png', width: 50, height: 50),
-        Image.asset('assets/mastercard.png', width: 50, height: 50),
+        Image.asset('assets/images/contact_less.png', width: 50, height: 50),
+        Image.asset('assets/images/mastercard.png', width: 50, height: 50),
       ],
     );
   }
@@ -167,10 +167,41 @@ class CreditCardsPage extends StatelessWidget {
   Column _buildDetailsBlock(String cardNumber, String cardHolder, String cardExpiration) {
     return Column(
       children: [
-
+        // KODE UI ANDA DI SINI
+        Text(
+          cardNumber,
+          style: const TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          cardHolder,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          cardExpiration,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),  
       ],
     );
   }
-  // buat   FloatingActionButton
-  
+  // buat FloatingActionButton
+  _buildAddCardButton({required Icon icon, required Color color}) {
+    return FloatingActionButton(
+      onPressed: () {
+        Text ("+");
+      }
+    );
+  }
   // Build Column
+
+
