@@ -158,12 +158,53 @@ class CreditCardsPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        // KODE GAMBAR ANDA DI SINI
+        Image.asset(
+          "assets/images/contact_less.png",
+          height: 20,
+          width: 18,
+        ),
+        Image.asset(
+          "assets/images/mastercard.png",
+          height: 50,
+          width: 50,
+        ),
       ],
     );
   }
   // buat Column berisi kontainer dan Informasi
+  Column _buildDetailsBlock({required String label, required String value}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          label,
+          style: const TextStyle(
+              color: Colors.grey, fontSize: 9, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          value,
+          style: const TextStyle(
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+        )
+      ],
+    );
+  }
 
   // buat   FloatingActionButton
-  
-  // Build Column
+  Container _buildAddCardButton({
+    required Icon icon,
+    required Color color,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(top: 24.0),
+      alignment: Alignment.center,
+      child: FloatingActionButton(
+        elevation: 2.0,
+        onPressed: () {},
+        backgroundColor: color,
+        mini: false,
+        child: icon,
+      ),
+    );
+  }
+}
