@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 //import 'bagian3/tab_bar.dart';
 //import 'bagian3/scrollBara.dart';
-import 'bagian3/bottomNavigasibar.dart';
-void main() {
-  runApp(MyBottomNav());
-}
+//import 'bagian3/bottomNavigasibar.dart';
+//void main() {
+ // runApp(MyBottomNav());
+//}
 
 
 // class MyApp extends StatelessWidget {
