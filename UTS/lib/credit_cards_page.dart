@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CreditCardsPage extends StatelessWidget {
   // TODO 1: GANTI VARIABEL INI DENGAN DATA DIRI ANDA
-  final String namaMahasiswa = "Ito"; // Jangan biarkan kosong!
+  final String namaMahasiswa = "Ito (Njoo)"; // Jangan biarkan kosong!
   final String nimMahasiswa = "20245520016"; // Jangan biarkan kosong!
 
   const CreditCardsPage({Key? key}) : super(key: key);
