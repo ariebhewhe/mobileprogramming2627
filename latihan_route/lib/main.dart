@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
+//screen kedua
 class LayarKedua extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Screen 2'),
+        title: const Text(' Ini Screen 2'),
       ),
-      body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
+      body: Center(child: Text("screen kedua, tap icon back di app bar")),
     );
   }
 }
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//perlu  dipisah karena Navigator perlu punya parent Material App
+//perlu class MyHome ini karena Navigator perlu akses ke parent Material App
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
