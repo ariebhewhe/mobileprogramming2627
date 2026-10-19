@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
-  
+
   @override
   State<MyHome> createState() => MyHomeState();
 }
@@ -38,12 +38,18 @@ class MyHomeState extends State<MyHome> {
         child: ElevatedButton(
           child: Text('Ke screen Kedua'),
           onPressed: () async {
-              hasil = await Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) {
-                return const LayarKedua(pesan: "haloo ini pesan dari screen 1");
-              }));
-              },
+            hasil = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const LayarKedua(
+                    pesan: "haloo ini pesan dari screen 1",
+                  );
+                },
               ),
-            ),
-   );
-}}
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
