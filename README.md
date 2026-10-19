@@ -17,3 +17,12 @@
 - type data  
 - loop, selection 
 - cek folder day3
+
+
+#### Day 4 
+- function 
+- Class 
+- OOP 
+
+#### DAY 8 
+- Route
