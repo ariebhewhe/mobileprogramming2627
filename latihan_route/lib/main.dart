@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
 
-class LayarKedua extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text(' Ini Screen 2')),
-      body: Center(child: Text("screen kedua, tap icon back di app bar")),
-    );
-  }
-}
-
 void main() {
   runApp(const MyApp());
 }
