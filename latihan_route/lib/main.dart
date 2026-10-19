@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihan_route/layarkedua.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,18 +11,39 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Test Route',
-      home: const MyHome(title: 'Latihan Route'),
-    );
+    return MaterialApp(title: 'Test Route', home: MyHome());
   }
 }
 
 class MyHome extends StatefulWidget {
-  const MyHome({super.key, required this.title});
+  const MyHome({Key? key}) : super(key: key);
+  
+  @override
+  State<MyHome> createState() => MyHomeState();
+}
 
-  final String title;
+class MyHomeState extends State<MyHome> {
+  String _hasil = "";
+
+  set hasil(String hasil) {
+    _hasil = hasil;
+    setState(() {});
+  }
 
   @override
-  State<MyHome> createState() => _MyHomeState();
-}
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Test Route')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Ke screen Kedua'),
+          onPressed: () async {
+              hasil = await Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) {
+                return const LayarKedua(pesan: "haloo ini pesan dari screen 1");
+              }));
+              },
+              ),
+            ),
+   );
+}}
