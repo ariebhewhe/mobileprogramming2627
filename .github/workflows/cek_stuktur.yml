@@ -1,0 +1,50 @@
+name: Cek Struktur File 
+
+on: 
+    push:
+        branches: [ "route" ]
+    pull_request:
+        branches: [ "route" ]
+
+
+jobs:
+  cek-struktur-dan-widget:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cek Keberadaan File
+        run: |
+          echo "Mengecek struktur file  gitS/lib/..."
+          
+          # Cek file main.dart
+          if [ ! -f "latihan_route/lib/main.dart" ]; then 
+            echo "❌ File main.dart tidak ditemukan!"
+            exit 1
+          fi
+          
+          
+          echo "✅ Semua file wajib ditemukan."
+      - name: 1. Cek Implementasi LayarKedua
+        run: |
+          echo "Mengecek LayarKedua di seluruh file .dart..."
+          grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/*.dart || { echo "❌ Class LayarKedua tidak ditemukan!"; exit 1; }
+          grep -q "AppBar" latihan_route/lib/*.dart || { echo "❌ AppBar pada LayarKedua tidak ditemukan!"; exit 1; }
+          grep -q "Ini Screen 2" latihan_route/lib/*.dart || { echo "❌ Teks judul 'Ini Screen 2' tidak ditemukan!"; exit 1; }
+          grep -q "screen kedua, tap icon back di app bar" latihan_route/lib/*.dart || { echo "❌ Teks pada body LayarKedua tidak ditemukan!"; exit 1; }
+          echo "✅ Implementasi LayarKedua sudah sesuai."
+      - name: Cek fungsi main() di main.dart
+        run: |
+          FILE="latihan_rout/lib/main.dart"
+          
+          echo "Mengecek fungsi main..."
+          grep -q "void main()" "$FILE" || { echo "❌ Fungsi void main() tidak ditemukan di main.dart!"; exit 1; }
+          grep -q "runApp(const MyApp())" "$FILE" || { echo "❌ Pemanggilan runApp(const MyApp()) tidak ditemukan!"; exit 1; }
+          
+          echo "✅ Fungsi main() sudah sesuai."
+      
+      
+        
+      
