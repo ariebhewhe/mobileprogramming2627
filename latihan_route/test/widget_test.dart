@@ -1,17 +1,37 @@
-// Smoke test dasar untuk layar demo notifikasi.
-//
-// Catatan: test ini tidak memanggil plugin native (tidak ada platform channel
-// di lingkungan test), sehingga aman dijalankan dengan `flutter test`.
-
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:latihan_route/main.dart';
 
 void main() {
-  testWidgets('Layar demo notifikasi tampil', (WidgetTester tester) async {
+  testWidgets('MyHome menampilkan dua tombol navigasi', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    expect(find.text('Praktikum Local Notification'), findsOneWidget);
-    expect(find.text('Tampilkan Notifikasi'), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsNWidgets(2));
+    expect(find.text('Ke screen Kedua'), findsOneWidget);
+    expect(find.text('Ke screen Kedua Pisah'), findsOneWidget);
+  });
+
+  testWidgets('Tombol pertama membuka LayarKedua lewat named route',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('Ke screen Kedua'));
+    await tester.pumpAndSettle();
+
+    expect(find.text(' Ini Screen 2'), findsOneWidget);
+  });
+
+  testWidgets('Tombol kedua membuka LayarKeduaPisah dengan pesan',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('Ke screen Kedua Pisah'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('Ini screen kedua pisah,ada Pesan : halloo ini pesan dari screen 1'),
+      findsOneWidget,
+    );
   });
 }
