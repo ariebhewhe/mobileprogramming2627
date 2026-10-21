@@ -13,8 +13,8 @@ class LayarKeduaPisah extends StatelessWidget {
     final String? receivedMessage =
       ModalRoute.of(context)!.settings.arguments as String?;
     
-    final String pesanTampil = pesan.isNotEmpty
-      ? pesan
+    final String pesanTampil = this.pesan.isNotEmpty
+      ? this.pesan
       : (receivedMessage ?? '(Navigasi ada data / tidak ada pesan)');
 
     return Scaffold(
