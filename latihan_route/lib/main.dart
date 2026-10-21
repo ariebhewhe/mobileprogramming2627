@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihan_route/layarkeduapisah.dart';
 
 class LayarKedua extends StatelessWidget {
   @override
@@ -22,7 +23,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Test Route', home: MyHome());
+    return MaterialApp(
+      title: 'Test Route',
+      // home: MyHome(), // Menghapus baris MyHome
+      routes: {
+        '/': (context) => MyHome(),
+        '/layar2': (context) => LayarKeduaPisah,
+      }
+    );
   }
 }
 
@@ -35,14 +43,29 @@ class MyHome extends StatelessWidget {
         title: const Text('Test Route'),
       ),
       body: Center(
-        child: ElevatedButton(
-            child: Text('Ke screen Kedua'),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return LayarKedua();
-              }));
-            }),
+        child: Column( // Untuk menampung dua tombol, gunakan Column
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: Text('Ke screen Kedua (Tanpa Data)'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/layar2'); // LayarKeduaPisah navigasi tanpa data
+              },
+            ),
+            SizedBox(height: 20), // Jarak antar tombol
+            ElevatedButton(
+              child: Text('Ke screen Kedua (Dengan Data)'),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/layar2',
+                  arguments: "halo ini pesan dari screen 1", // Kirim data string
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
-}
+} 
