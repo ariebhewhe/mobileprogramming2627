@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib/layarkeduapisah.dart';
-
-class LayarKedua extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen 2'),
-      ),
-      body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
-    );
-  }
-}
+import 'layarkeduapisah.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,16 +13,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Test Route',
       // home: MyHome(), // Hapus baris ini
+      initialRoute: '/',
       routes: {
-        '/': (context) => MyHome(),
-        '/layar2': (context) => LayarKeduaPisah(), // Pastikan LayarKeduaPisah sudah dibuat
+        '/': (context) => const MyHome(),
+        '/layar2': (context) => const LayarKeduaPisah(), // Pastikan LayarKeduaPisah sudah dibuat
       },
+      onUnknownRoute: (settings) => MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(title: const Text('Route tidak ditemukan')),
+          body: Center(child: Text('Route tidak dikenal: ${settings.name}')),
+        ),
+      ),
     );
   }
 }
 
 //perlu  dipisah karena Navigator perlu punya parent Material App
 class MyHome extends StatelessWidget {
+  const MyHome({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
