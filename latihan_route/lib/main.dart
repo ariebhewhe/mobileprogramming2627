@@ -5,6 +5,19 @@ void main() {
   runApp(const MyApp());
 }
 
+class LayarKedua extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Screen 2'),
+      ),
+      body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
