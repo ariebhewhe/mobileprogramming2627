@@ -12,7 +12,7 @@ class LayarKeduaPisah extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Screen Kedua Pisah'),
+        title: const Text('Ini Screen 2'),
       ),
       body: Center(
         child: Text(
