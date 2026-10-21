@@ -40,26 +40,26 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test Route'),
+        title: const Text('Test Route'), // Judul AppBar MyHome
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              child: const Text('Ke screen Kedua (Tanpa Data)'),
+              child: const Text('Ke screen Kedua (Tanpa Data)'), // Teks tombol pertama
               onPressed: () {
-                Navigator.pushNamed(context, '/layar2');
+                Navigator.pushNamed(context, '/layar2'); // Navigasi tanpa data
               },
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              child: const Text('Ke screen Kedua (Dengan Data)'),
+              child: const Text('Ke screen Kedua (Dengan Data)'), // Teks tombol kedua
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   '/layar2',
-                  arguments: "halloo ini pesan dari screen 1",
+                  arguments: "halloo ini pesan dari screen 1", // Navigasi dengan data
                 );
               },
             ),
