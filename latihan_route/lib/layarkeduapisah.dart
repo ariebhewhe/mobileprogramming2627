@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
 class LayarKeduaPisah extends StatelessWidget {
-    const LayarKeduaPisah({Key? key}) : super(key: key);
+  final String pesan; // Deklarasi variabel pesan
 
-     @override
-     Widget build(BuildContext context) {
-    // Mengambil pesan dari argument. Jika tidak ada, default stringnya akan kosong.
-    final String receivedMessage = ModalRoute.of(context)?.settings.arguments as String? ?? 'Tidak ada pesan';
+  // Konstruktor untuk menerima pesan
+  const LayarKeduaPisah({Key? key, required this.pesan}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Jika navigasi tanpa data, pesan akan kosong atau null.
+    // Kita bisa ambil pesan dari arguments jika dikirim melalui named route.
+    final String? receivedMessage = ModalRoute.of(context)!.settings.arguments as String?;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ini Screen 2'),
+        title: const Text('Screen Kedua Pisah'),
       ),
       body: Center(
         child: Text(
           // Gunakan pesan dari konstruktor jika ada, atau dari arguments
-          "Ini screen kedua pisah, ada Pesan: $receivedMessage",
+          "Ini screen kedua pisah, ada Pesan: $pesan}",
           style: TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),
