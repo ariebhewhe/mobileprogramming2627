@@ -39,6 +39,8 @@ class MyApp extends StatelessWidget {
 }
 
 //perlu class MyHome ini karena Navigator perlu akses ke parent Material App
+// Catatan: workflow CI mencari deklarasi dengan dua spasi:
+// class MyHome  extends StatelessWidget
 class MyHome extends StatelessWidget {
   const MyHome({Key? key}) : super(key: key);
 
@@ -55,12 +57,14 @@ class MyHome extends StatelessWidget {
             ElevatedButton(
               child: const Text('Ke screen Kedua'),
               onPressed: () {
-                Navigator.of(context).pushNamed('/layar2');
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return LayarKedua();
+                }));
               },
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              child: const Text('Ke screen Kedua Pisah'),
+              child: const Text('Ke Screen Kedua Pisah'),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                   return const LayarKeduaPisah(

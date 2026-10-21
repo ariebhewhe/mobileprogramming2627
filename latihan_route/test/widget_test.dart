@@ -9,10 +9,10 @@ void main() {
 
     expect(find.byType(ElevatedButton), findsNWidgets(2));
     expect(find.text('Ke screen Kedua'), findsOneWidget);
-    expect(find.text('Ke screen Kedua Pisah'), findsOneWidget);
+    expect(find.text('Ke Screen Kedua Pisah'), findsOneWidget);
   });
 
-  testWidgets('Tombol pertama membuka LayarKedua lewat named route',
+  testWidgets('Tombol pertama membuka LayarKedua',
       (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
@@ -26,7 +26,7 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    await tester.tap(find.text('Ke screen Kedua Pisah'));
+    await tester.tap(find.text('Ke Screen Kedua Pisah'));
     await tester.pumpAndSettle();
 
     expect(
