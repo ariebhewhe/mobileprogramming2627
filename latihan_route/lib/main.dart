@@ -34,7 +34,7 @@ class MyHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              child: Text('Ke screen Kedua (Tanpa Data)'),
+              child: const Text('Ke screen Kedua (Tanpa Data)'),
               onPressed: () {
                 // Navigasi ke LayarKeduaPisah tanpa data
                 Navigator.pushNamed(context, '/layar2');
@@ -42,7 +42,7 @@ class MyHome extends StatelessWidget {
             ),
             SizedBox(height: 20), // Jarak antar tombol
             ElevatedButton(
-              child: Text('Ke screen Kedua (Dengan Data)'),
+              child: const Text('Ke screen Kedua (Dengan Data)'),
               onPressed: () {
                 // Navigasi ke LayarKeduaPisah dengan mengirimkan data
                 Navigator.pushNamed(

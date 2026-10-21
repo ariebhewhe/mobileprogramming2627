@@ -6,7 +6,7 @@ class LayarKeduaPisah extends StatelessWidget {
      @override
      Widget build(BuildContext context) {
     // Mengambil pesan dari argument. Jika tidak ada, default stringnya akan kosong.
-    final String receivedMessage = ModalRoute.of(context)!.settings.arguments as String? ?? 'Tidak ada pesan';
+    final String receivedMessage = ModalRoute.of(context)?.settings.arguments as String? ?? 'Tidak ada pesan';
 
     return Scaffold(
       appBar: AppBar(
