@@ -1,19 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_route/layarkeduapisah.dart';
 
-class LayarKedua extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screen 2'),
-      ),
-      body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
-    );
-  }
-}
-
 void main() {
   runApp(const MyApp());
 }
@@ -25,16 +12,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Test Route',
-      // home: MyHome(), // Menghapus baris MyHome
+      // Hapus properti 'home:'
       routes: {
         '/': (context) => MyHome(),
-        '/layar2': (context) => LayarKeduaPisah,
-      }
+        '/layar2': (context) => LayarKeduaPisah(), // <--- Menggunakan LayarKeduaPisah
+      },
+      initialRoute: '/', // Opsional: Menentukan rute awal
     );
   }
 }
 
-//perlu  dipisah karena Navigator perlu punya parent Material App
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -43,23 +30,25 @@ class MyHome extends StatelessWidget {
         title: const Text('Test Route'),
       ),
       body: Center(
-        child: Column( // Untuk menampung dua tombol, gunakan Column
+        child: Column( // Menggunakan Column untuk dua tombol
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               child: Text('Ke screen Kedua (Tanpa Data)'),
               onPressed: () {
-                Navigator.pushNamed(context, '/layar2'); // LayarKeduaPisah navigasi tanpa data
+                // Navigasi ke LayarKeduaPisah tanpa data
+                Navigator.pushNamed(context, '/layar2');
               },
             ),
             SizedBox(height: 20), // Jarak antar tombol
             ElevatedButton(
               child: Text('Ke screen Kedua (Dengan Data)'),
               onPressed: () {
+                // Navigasi ke LayarKeduaPisah dengan mengirimkan data
                 Navigator.pushNamed(
                   context,
                   '/layar2',
-                  arguments: "halo ini pesan dari screen 1", // Kirim data string
+                  arguments: "halo ini pesan dari screen 1",
                 );
               },
             ),
@@ -68,4 +57,7 @@ class MyHome extends StatelessWidget {
       ),
     );
   }
-} 
+}
+
+// <--- PENTING: Pastikan tidak ada lagi definisi kelas LayarKedua di sini (di main.dart)!
+// Jika ada, hapuslah.
