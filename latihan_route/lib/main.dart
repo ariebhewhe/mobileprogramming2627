@@ -19,7 +19,9 @@ class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
 
   @override
-  State<MyHome> createState() => MyHomeState();
+  State<StatefulWidget> createState() {
+    return MyHomeState();
+  }
 }
 
 class MyHomeState extends State<MyHome> {
@@ -35,19 +37,25 @@ class MyHomeState extends State<MyHome> {
     return Scaffold(
       appBar: AppBar(title: const Text('Test Route')),
       body: Center(
-        child: ElevatedButton(
-          child: Text('Ke screen Kedua'),
-          onPressed: () async {
-            hasil = await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return const LayarKedua(
-                    pesan: "haloo ini pesan dari screen 1",
-                  );
-                },
-              ),
-            );
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: const Text('Ke screen Kedua'),
+              onPressed: () async {
+                hasil = await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const LayarKedua(
+                        pesan: "haloo ini pesan dari screen 1",
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+            Text(" Hasil: $_hasil"),
+          ],
         ),
       ),
     );

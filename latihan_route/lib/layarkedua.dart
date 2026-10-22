@@ -12,7 +12,7 @@ class LayarKedua extends StatelessWidget {
         child: ElevatedButton(
           child: Text("Ini screen kedua, ada pesan: $pesan"),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop("ini data dari screen 2");
           },
         ),
       ),
