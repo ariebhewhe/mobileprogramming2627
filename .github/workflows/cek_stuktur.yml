@@ -1,0 +1,392 @@
+name: Cek Struktur File 
+
+on: 
+    push:
+        branches: [ "route" ]
+    pull_request:
+        branches: [ "route" ]
+
+
+jobs:
+  cek-struktur-dan-widget:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cek Keberadaan File
+        run: |
+            echo "Mengecek struktur file  gitS/lib/..."
+            ERROR=0
+
+            # Cek file main.dart
+            if [ ! -f "latihan_route/lib/main.dart" ]; then 
+              echo "❌ File main.dart tidak ditemukan!"
+              ERROR=1
+            else 
+              echo "✅ File Main.dart ditemukan."
+            fi
+
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai instruksi pada main.dart !"
+              echo "=========================================================="
+              exit 1
+            fi
+          
+      - name: 1. Cek Implementasi LayarKedua
+        run: |
+            ERROR=0
+            echo "Mengecek LayarKedua di seluruh file .dart..."
+            grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/*.dart || { echo "❌ Class LayarKedua tidak ditemukan!"; ERROR=1; }
+            grep -q "AppBar" latihan_route/lib/*.dart || { echo "❌ AppBar pada LayarKedua tidak ditemukan!"; ERROR=1; }
+            grep -q "Ini Screen 2" latihan_route/lib/*.dart || { echo "❌ Teks judul 'Ini Screen 2' tidak ditemukan!"; ERROR=1; }
+            grep -q "screen kedua, tap icon back di app bar" latihan_route/lib/*.dart || { echo "❌ Teks pada body LayarKedua tidak ditemukan!"; ERROR=1; }
+          
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai LayarKedua!"
+              echo "=========================================================="
+              exit 1
+            fi
+            echo "✅ Implementasi LayarKedua sudah sesuai."
+
+      - name: 2. Cek fungsi main() di main.dart
+        run: |
+            FILE="latihan_route/lib/main.dart"
+            ERROR=0
+            echo "Mengecek fungsi main..."
+            grep -q "void main()" "$FILE" || { echo "❌ Fungsi void main() tidak ditemukan di main.dart!"; ERROR=1; }
+            grep -q "runApp(const MyApp())" "$FILE" || { echo "❌ Pemanggilan runApp(const MyApp()) tidak ditemukan!"; ERROR=1; }
+            
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai MyApp!"
+              echo "=========================================================="
+              exit 1
+            fi
+            echo "✅ Implementasi LayarKedua sudah sesuai."
+            echo "✅ Fungsi main() sudah sesuai."
+      
+      - name: 3. cek class MyApp ()
+        run : |
+            FILE="latihan_route/lib/main.dart"
+            ERROR=0
+            echo "Mengecek fungsi class MyMyApp"
+            grep -q "class MyApp extends StatelessWidget" "$FILE" || { echo "❌ calss MyApp StatelessWidget tidak ditemukan "; ERROR=1; }
+            grep -q "Widget build(BuildContext context)" "$FILE" || { echo "❌ Widget build(BuildContext context) "; ERROR=1; }
+            grep -q "MaterialApp" "$FILE" || { echo "❌ MaterialApp Tidak ada"; ERROR=1; }
+            grep -q "Test Route" "$FILE" || { echo "❌ title: Test Route "; ERROR=1; }
+            grep -q "home: MyHome()" "$FILE" || { echo "❌ home: MyHome()"; ERROR=1; }
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki pada class MyApp !"
+              echo "=========================================================="
+              exit 1
+              fi
+              echo "✅ Fungsi class MyApp() sudah sesuai." 
+
+      - name: 4. cek class MyHome  ()
+        run : |
+            FILE="latihan_route/lib/main.dart"
+            ERROR=0
+            echo "Mengecek fungsi class MyHome "
+            grep -q "class MyHome  extends StatelessWidget" "$FILE" || { echo "❌ calss MyHome  StatelessWidget tidak ditemukan "; ERROR=1; }
+            grep -q "Scaffold" "$FILE" || { echo "❌ Scaffold tidak ditemukan "; ERROR=1; }
+            grep -q "appBar: AppBar" "$FILE" || { echo "❌ AppBar tidak ditemukan "; ERROR=1; }
+            grep -q "title: const Text('Test Route')" "$FILE" || { echo "❌ title tidak ditemukan "; ERROR=1; }
+            grep -q "Center" "$FILE" || { echo "❌ Center tidak ditemukan "; ERROR=1; }
+            grep -q "ElevatedButton" "$FILE" || { echo "❌ ElevatedButton tidak ditemukan "; ERROR=1; }
+            grep -q "Text('Ke screen Kedua')" "$FILE" || { echo "❌ Ke screen Kedua tidak ditemukan "; ERROR=1; }
+            grep -q "onPressed" "$FILE" || { echo "❌ Ke onPressed Kedua tidak ditemukan "; ERROR=1; }
+            grep -q "Navigator.of(context).push(MaterialPageRoute(builder: (context)" "$FILE" || { echo "❌ Ke Navigator tidak ditemukan "; ERROR=1; }
+            grep -q "return LayarKedua()" "$FILE" || { echo "❌ Ke return LayarKedua() Kedua tidak ditemukan "; ERROR=1; }
+      
+      - name: 5. Install Dependencies
+        run : |
+            echo "Buka cmd dan jalankan flutter pub get"
+            # flutter pub Get
+      
+      - name: 6. Uji Kompilasi Web (Pengganti flutter run)
+        run : |
+            echo "Buka cmd dan jalankan flutter build web --release"
+            # flutter build web --release
+
+      - name: 7. Meningkatkan modularitas, class layarKedua dipisahkan
+        run : |
+            ERROR=0
+            # Fungsi pembantu untuk memindai teks wajib
+            cek_teks() {
+              local file=$1
+              local teks_wajib=$2
+              if ! grep -q "$teks_wajib" "$file"; then
+                echo "❌ PELANGGARAN di $file: Anda tidak ada atau menghapus atau mengubah deklarasi '$teks_wajib'"
+                ERROR=1
+              fi
+            }
+            # Fungsi pembantu untuk memindai teks terlarang (opsional)
+            cek_larangan() {
+              local file=$1
+              local teks_terlarang=$2
+              if grep -q "$teks_terlarang" "$file"; then
+                echo "❌ PELANGGARAN di $file: Ditemukan penggunaan kode terlarang '$teks_terlarang'"
+                ERROR=1
+              fi
+            }
+            
+            # FILE 
+            FILE_MAIN="latihan_route/lib/main.dart"
+
+            # Teks wajib ada (Gunakan $FILE_MAIN)
+            cek_teks "$FILE_MAIN" "import 'layarkeduapisah.dart';"
+            cek_teks "$FILE_MAIN" "void main()"
+            cek_teks "$FILE_MAIN" "class MyApp extends StatelessWidget"
+            cek_teks "$FILE_MAIN" "class MyHome extends StatelessWidget"
+
+            # tekas Dilarang ada
+            
+            # ====================================================
+            # EVALUASI HASIL AKHIR
+            # ====================================================
+            if [ $ERROR -eq 1 ]; then
+            echo "❌ Pengecekan gagal! Silakan perbaiki di atas."
+            exit 1
+            else
+              echo "✅ Semua teks wajib ditemukan dan tidak ada pelanggaran!"
+            fi
+
+      - name: 8. cek file layarkeduapisah.dart 
+        run : |
+           echo "Mengecek struktur file  gitS/lib/..."
+            ERROR=0
+
+            # Cek file main.dart
+            if [ ! -f "latihan_route/lib/layarkeduapisah.dart" ]; then 
+              echo "❌ File Layarkeduapisah.dart tidak ditemukan!"
+              echo "Buat file pada latihan_route/lib/layarkeduapisah.dart"
+              ERROR=1
+            else 
+              echo "✅ File layarkeduapisah.dart ditemukan."
+            fi
+
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai instruksi !"
+              echo "=========================================================="
+              exit 1
+            fi
+      -   name: 9. validasi MyHome dan Routing Navigasi 
+          run : |
+            ERROR=0
+
+            cek_teks() {
+              local file=$1
+              local teks_wajib=$2
+              if ! grep -Fq "$teks_wajib" "$file"; then
+                echo "❌ PELANGGARAN di $file: Tidak ditemukan deklarasi '$teks_wajib'"
+                ERROR=1
+              fi
+            }
+            
+            # Cari file di /lib/ yang berisi class MyHome
+            TARGET_FILE=$(grep -l "class MyHome extends StatelessWidget" latihan_route/lib/main.dart | head -n 1)
+            if [ -z "$TARGET_FILE" ]; then
+              echo "❌ ERROR: Class MyHome tidak ditemukan di dalam folder latihan_route/lib/main.dart"
+              exit 1
+            fi
+            echo "Mengecek komponen MyHome di $TARGET_FILE..."
+            cek_teks "$TARGET_FILE" "class MyHome extends StatelessWidget"
+            cek_teks "$TARGET_FILE" "Text('Test Route')"
+            cek_teks "$TARGET_FILE" "body: Center("
+            cek_teks "$TARGET_FILE" "child: Column("
+            cek_teks "$TARGET_FILE" "ElevatedButton("
+            cek_teks "$TARGET_FILE" "Text('Ke screen Kedua')"
+            cek_teks "$TARGET_FILE" "Text('Ke Screen Kedua Pisah')"
+            cek_teks "$TARGET_FILE" "Navigator.of(context).push"
+            cek_teks "$TARGET_FILE" "MaterialPageRoute"
+            cek_teks "$TARGET_FILE" "LayarKedua()"
+            cek_teks "$TARGET_FILE" "LayarKeduaPisah("
+
+            if [ $ERROR -eq 1 ]; then
+              echo "❌ Validasi class MyHome gagal!"
+              exit 1
+            else
+              echo "✅ Validasi class MyHome dan navigasi berhasil!"
+            fi
+      - name: 10. Validasi Struktur layarkeduapisah.dart
+        run: |
+          ERROR=0
+
+          # Fungsi pembantu dengan pesan petunjuk perbaikan yang jelas
+          cek_teks() {
+            local file=$1
+            local teks_wajib=$2
+            local petunjuk=$3
+            if ! grep -Fq "$teks_wajib" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode tidak ditemukan: '$teks_wajib'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          FILE_PISAH="latihan_route/lib/layarkeduapisah.dart"
+
+          echo "Mengecek isi file $FILE_PISAH..."
+
+          # Pengecekan beserta petunjuk perbaikannya
+          cek_teks "$FILE_PISAH" "const LayarKeduaPisah({Key? key, required this.pesan});" \
+            "Tambahkan constructor wajib dengan parameter 'required this.pesan'."
+
+          cek_teks "$FILE_PISAH" "final String pesan;" \
+            "Deklarasikan variabel 'final String pesan;' di dalam class LayarKeduaPisah."
+
+          cek_teks "$FILE_PISAH" 'Text("Ini screen kedua pisah,ada Pesan : $pesan")' \
+            "Gunakan Text(\"Ini screen kedua pisah,ada Pesan : \$pesan\") pada child ElevatedButton."
+
+          if [ $ERROR -eq 1 ]; then
+            echo ""
+            echo "❌ Pengecekan layarkeduapisah.dart gagal! Perbaiki kode berdasarkan petunjuk di atas."
+            exit 1
+          else
+            echo "✅ Validasi layarkeduapisah.dart berhasil!"
+          fi
+      
+      - name: 11. Validasi Passing Parameter Pesan ke LayarKeduaPisah
+        run: |
+          ERROR=0
+
+          cek_teks() {
+            local file=$1
+            local teks_wajib=$2
+            local petunjuk=$3
+            if ! grep -Fq "$teks_wajib" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode tidak ditemukan: '$teks_wajib'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          FILE_MAIN="latihan_route/lib/main.dart"
+
+          echo "Mengecek pengiriman parameter di $FILE_MAIN..."
+
+          # Pengecekan komponen navigasi dan passing parameter
+          cek_teks "$FILE_MAIN" 'LayarKeduaPisah(' \
+            "Pastikan memanggil Widget LayarKeduaPisah pada MaterialPageRoute."
+
+          cek_teks "$FILE_MAIN" 'pesan: "halloo ini pesan dari screen 1"' \
+            "Kirimkan parameter pesan dengan isi 'halloo ini pesan dari screen 1' saat memanggil LayarKeduaPisah()."
+
+          if [ $ERROR -eq 1 ]; then
+            echo ""
+            echo "❌ Validasi pengiriman pesan ke LayarKeduaPisah gagal! Perbaiki sesuai petunjuk di atas."
+            exit 1
+          else
+            echo "✅ Validasi passing parameter pesan berhasil!"
+          fi
+      - name: 12. Validasi Named Routes pada MyApp
+        run: |
+          ERROR=0
+
+          cek_teks() {
+            local file=$1
+            local teks_wajib=$2
+            local petunjuk=$3
+            if ! grep -Fq "$teks_wajib" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode tidak ditemukan: '$teks_wajib'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          cek_larangan() {
+            local file=$1
+            local teks_terlarang=$2
+            local petunjuk=$3
+            if grep -E "^[[:space:]]*home:" "$file" > /dev/null; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Properti 'home:' masih aktif (tidak di-komentar/dihapus)."
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          FILE_MAIN="latihan_route/lib/main.dart"
+
+          echo "Mengecek konfigurasi routes di $FILE_MAIN..."
+
+          # 1. Pastikan home: MyHome() tidak aktif secara langsung
+          cek_larangan "$FILE_MAIN" "home:" \
+            "Hapus properti home: MyHome() atau berikan komentar // di depannya."
+
+          # 2. Cek deklarasi routes
+          cek_teks "$FILE_MAIN" "routes: {" \
+            "Deklarasikan properti 'routes: {' di dalam MaterialApp."
+
+          # 3. Cek route '/' ke MyHome()
+          if ! grep -Eq "'/'[[:space:]]*:[[:space:]]*\(context\)[[:space:]]*=>[[:space:]]*(const[[:space:]]+)?MyHome\(\)" "$FILE_MAIN"; then
+            echo "----------------------------------------------------"
+            echo "❌ PELANGGARAN di $FILE_MAIN"
+            echo "   👉 Petunjuk: Daftarkan route '/' : (context) => MyHome()"
+            echo "----------------------------------------------------"
+            ERROR=1
+          fi
+
+          # 4. Cek route '/layar2' ke LayarKedua()
+          if ! grep -Eq "'/layar2'[[:space:]]*:[[:space:]]*\(context\)[[:space:]]*=>[[:space:]]*(const[[:space:]]+)?LayarKedua\(\)" "$FILE_MAIN"; then
+            echo "----------------------------------------------------"
+            echo "❌ PELANGGARAN di $FILE_MAIN"
+            echo "   👉 Petunjuk: Daftarkan route '/layar2' : (context) => LayarKedua()"
+            echo "----------------------------------------------------"
+            ERROR=1
+          fi
+
+          if [ $ERROR -eq 1 ]; then
+            echo ""
+            echo "❌ Validasi named routes pada MyApp gagal! Perbaiki kode sesuai petunjuk di atas."
+            exit 1
+          else
+            echo "✅ Validasi named routes pada MyApp berhasil!"
+          fi
+
+            
+
+
+
+            
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+           
+
+           
+
+      
+
+      
+      
+        
+      
