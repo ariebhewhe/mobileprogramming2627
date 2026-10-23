@@ -59,7 +59,7 @@ class MyHome extends StatelessWidget {
                   context,
                   '/layar2',
                   arguments: {
-                    "halloo ini pesan dari screen 1", // Navigasi dengan data
+                    'pesan': "halloo ini pesan dari screen 1", // Navigasi dengan data
                   },
                 );
               },
