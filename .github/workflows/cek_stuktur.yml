@@ -101,7 +101,7 @@ jobs:
           # Memastikan LayarKeduaPisah ada di file terpisah
           grep -q "class LayarKeduaPisah extends StatelessWidget" latihan_route/lib/layarkeduapisah.dart || { echo "❌ Class LayarKeduaPisah tidak ditemukan di layarkeduapisah.dart!"; exit 1; }
           # Memastikan LayarKedua (lama) TIDAK ada di main.dart
-          grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/main.dart && { echo "❌ Class LayarKedua masih ditemukan di main.dart! Harap hapus."; exit 1; }
+          grep -Eq '^[[:space:]]*class[[:space:]]+LayarKedua[[:space:]]+extends[[:space:]]+StatelessWidget([[:space:]]|\{)' latihan_route/lib/main.dart && { echo "❌ Class LayarKedua masih ditemukan di main.dart! Harap hapus."; exit 1; }
           echo "✅ Modularitas dengan pemisahan class sudah diterapkan."
 
       - name: 8. Cek file layarkeduapisah.dart
