@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:latihan_route/layarkeduapisah.dart';
 
 // >>> MENGHAPUS CLASS LAYARKEDUA <<<
-class LayarKedua extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ini Screen 2'),
-      ),
-      body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
-    );
-  }
-}
+//class LayarKedua extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    return Scaffold(
+//      appBar: AppBar(
+//        title: const Text('Ini Screen 2'),
+//      ),
+//      body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
+//    );
+//  }
+//}
 // >>> HAPUS SAMPE DISINI <<<
 
 void main() {
