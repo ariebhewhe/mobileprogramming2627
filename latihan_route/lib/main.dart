@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_route/layarkeduapisah.dart';
 
+// Hapus Class LayarKedua
 class LayarKedua extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class LayarKedua extends StatelessWidget {
     );
   }
 }
+// Hapus Class LayarKedua
 
 void main() {
   runApp(const MyApp());
