@@ -14,6 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+            flutter-version: '3.x.x'
+            channel: 'stable'
+
       - name: Cek Keberadaan File
         run: |
           echo "Mengecek struktur file latihan_route/lib/..."
