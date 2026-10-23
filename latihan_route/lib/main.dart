@@ -7,7 +7,7 @@ class LayarKedua extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Screen 2'),
+        title: const Text('Ini Screen 2'),
       ),
       body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
     );
