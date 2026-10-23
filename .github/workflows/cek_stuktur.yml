@@ -121,7 +121,20 @@ jobs:
           # Cek tombol pertama (tanpa data)
           grep -q "Navigator.pushNamed(context, '/layar2');" "$FILE" || { echo "❌ Navigasi tombol 'Tanpa Data' ke '/layar2' tidak ditemukan!"; exit 1; }
           # Cek tombol kedua (dengan data)
-          grep -q "Navigator.pushNamed(context, '/layar2', arguments: \"halloo ini pesan dari screen 1\");" "$FILE" || { echo "❌ Navigasi tombol 'Dengan Data' ke '/layar2' dengan argumen tidak ditemukan atau salah!"; exit 1; }
+          awk '
+            /Navigator\.pushNamed\(/ { in_call = 1; call = $0 }
+            in_call && !/Navigator\.pushNamed\(/ { call = call " " $0 }
+            in_call && /\);/ {
+              if (index(call, "context,") &&
+                  index(call, "\047/layar2\047") &&
+                  index(call, "arguments:") &&
+                  index(call, "\"halloo ini pesan dari screen 1\"")) {
+                found = 1
+              }
+              in_call = 0
+            }
+            END { exit !found }
+          ' "$FILE" || { echo "❌ Navigasi tombol 'Dengan Data' ke '/layar2' dengan argumen tidak ditemukan atau salah!"; exit 1; }
           echo "✅ MyHome dan Routing Navigasi sudah tervalidasi."
 
       - name: 10. Validasi Struktur layarkeduapisah.dart (Konten)
