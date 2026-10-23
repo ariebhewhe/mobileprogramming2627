@@ -58,7 +58,9 @@ class MyHome extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   '/layar2',
-                  arguments: "halloo ini pesan dari screen 1", // Navigasi dengan data
+                  arguments: {
+                    "halloo ini pesan dari screen 1", // Navigasi dengan data
+                  },
                 );
               },
             ),
