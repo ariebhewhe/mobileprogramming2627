@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Test Route',
-      // Hapus properti 'home:' jika ada.
+      // Hapus properti 'home:'
       routes: {
         '/': (context) => MyHome(),
         '/layar2': (context) => const LayarKeduaPisah(), // <<< PENTING: Panggil LayarKeduaPisah di sini.
