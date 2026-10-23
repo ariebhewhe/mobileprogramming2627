@@ -7,7 +7,7 @@ on:
         branches: [ "route" ]
 
 jobs:
-  cek-struktur-file:
+  cek-struktur-dan-widget:
     runs-on: ubuntu-latest
     
     steps:
