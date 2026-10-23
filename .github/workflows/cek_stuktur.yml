@@ -61,7 +61,7 @@ jobs:
           echo "Mengecek class MyHome di $FILE..."
           grep -q "class MyHome extends StatelessWidget" "$FILE" || { echo "❌ Class MyHome tidak ditemukan atau bukan StatelessWidget!"; exit 1; }
           grep -q "AppBar" "$FILE" || { echo "❌ AppBar tidak ditemukan di MyHome!"; exit 1; }
-          grep -q "Test Routes:" "$FILE" || { echo "❌ Judul 'Test Routes' di AppBar MyHome tidak ditemukan!"; exit 1; }
+          grep -q "Test Routes" "$FILE" || { echo "❌ Judul 'Test Routes' di AppBar MyHome tidak ditemukan!"; exit 1; }
           grep -q "Ke Screen Kedua (Tanpa Data)" "$FILE" || { echo "❌ Tombol 'Ke screen Kedua (Tanpa Data)' tidak ditemukan di MyHome!";} exit 1; }
           grep -q "Ke Screen Kedua (Dengan Data)" "$FILE" || { echo "❌ Tombol 'Ke screen Kedua (Dengan Data)' tidak ditemukan di MyHome!";} exit 1; }
           echo "✅ Class MyHome dan tombol-tombol navigasi sudah sesuai."
