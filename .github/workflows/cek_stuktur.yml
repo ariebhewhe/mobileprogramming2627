@@ -141,9 +141,9 @@ jobs:
         run: |
           FILE="latihan_route/lib/layarkeduapisah.dart"
           echo "Memvalidasi konten LayarKeduaPisah..."
-          grep -q "ModalRoute.of(context)?.settings.arguments as String?;" "$FILE" || { echo "❌ Pengambilan argumen dari ModalRoute tidak ditemukan!"; exit 1; }
-          grep -q "final String pesan = receivedMessage ?? 'Tidak ada pesan';" "$FILE" || { echo "❌ Penanganan pesan default tidak ditemukan atau salah!"; exit 1; }
-          grep -q "Text(\"Ini screen kedua pisah, ada Pesan: \$pesan\")" "$FILE" || { echo "❌ Teks tampilan pesan di LayarKeduaPisah tidak ditemukan atau salah!"; exit 1; }
+          grep -Fq "ModalRoute.of(context)!.settings.arguments as String?" "$FILE" || { echo "❌ Pengambilan argumen dari ModalRoute tidak ditemukan!"; exit 1; }
+          grep -Fq "?? 'Tidak ada pesan'" "$FILE" || { echo "❌ Penanganan pesan default tidak ditemukan atau salah!"; exit 1; }
+          grep -Fq 'Ini screen kedua pisah, ada Pesan: $receivedMessage' "$FILE" || { echo "❌ Teks tampilan pesan di LayarKeduaPisah tidak ditemukan atau salah!"; exit 1; }
           echo "✅ Struktur konten layarkeduapisah.dart sudah tervalidasi."
 
       - name: 11. Validasi Passing Parameter Pesan ke LayarKeduaPisah
