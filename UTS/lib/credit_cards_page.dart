@@ -1,34 +1,62 @@
 import 'package:flutter/material.dart';
 
 class CreditCardsPage extends StatelessWidget {
+  
+  // Contoh input data mahasiswa
+  final String namaMahasiswa = "ARY BUDI WARSITO"; 
+  final String nimMahasiswa = "20232627"; // Digit terakhir 7 (Ganjil)
+
   @override
   Widget build(BuildContext context) {
+    
+    Color warnaKartu1;
+    Color warnaKartu2;
+
+    // KUNCI JAWABAN LOGIKA NIM:
+    // Mengambil karakter terakhir dari String NIM, lalu diubah ke Integer
+    String digitTerakhirString = nimMahasiswa.substring(nimMahasiswa.length - 1);
+    int digitTerakhir = int.tryParse(digitTerakhirString) ?? 0;
+
+    // Penentuan Ganjil / Genap menggunakan Modulo (%)
+    if (digitTerakhir % 2 != 0) {
+      // Jika hasil sisa bagi tidak 0, maka GANJIL
+      warnaKartu1 = const Color(0xFF090943); // Biru
+      warnaKartu2 = Colors.red;              // Merah
+    } else {
+      // Jika hasil sisa bagi 0, maka GENAP
+      warnaKartu1 = const Color(0xFF000000); // Hitam
+      warnaKartu2 = Colors.green;            // Hijau
+    }
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-          // isi
             _buildTitleSection(
                 title: "Rincian pembayaran",
                 subTitle: "Bagaimana Anda ingin membayar?"),
+            
             _buildCreditCard(
-                color: Color(0xFF090943),
-                cardExpiration: "08/2022",
-                cardHolder: "ARY BW",
-                cardNumber: "3546 7532 XXXX 9742"),
-            SizedBox(
+                color: warnaKartu1, 
+                cardExpiration: "08/2026",
+                cardHolder: namaMahasiswa,
+                cardNumber: nimMahasiswa),
+            
+            const SizedBox(
               height: 15,
             ),
+            
             _buildCreditCard(
-                color: Color(0xFF000000),
-                cardExpiration: "05/2024",
-                cardHolder: "ARY BW",
+                color: warnaKartu2,
+                cardExpiration: "05/2027",
+                cardHolder: namaMahasiswa,
                 cardNumber: "9874 4785 XXXX 6548"),
+            
             _buildAddCardButton(
-              icon: Icon(Icons.add),
-              color: Color(0xFF081603),
+              icon: const Icon(Icons.add),
+              color: const Color(0xFF081603),
             )
           ],
         ),
@@ -36,23 +64,27 @@ class CreditCardsPage extends StatelessWidget {
     );
   }
 
+  // ===========================================================================
+  // KUNCI JAWABAN IMPLEMENTASI FUNGSI WIDGET
+  // ===========================================================================
+
   // Build the title section
-  Column _buildTitleSection({@required title, @required subTitle}) {
+  Column _buildTitleSection({required String title, required String subTitle}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 8.0, top: 16.0),
           child: Text(
-            '$title',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            title,
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 16.0),
           child: Text(
-            '$subTitle',
-            style: TextStyle(fontSize: 21, color: Colors.black45),
+            subTitle,
+            style: const TextStyle(fontSize: 21, color: Colors.black45),
           ),
         )
       ],
@@ -60,8 +92,8 @@ class CreditCardsPage extends StatelessWidget {
   }
 
   // Build the credit card widget
-  Card _buildCreditCard(
-      { required Color color,
+  Card _buildCreditCard({ 
+      required Color color,
       required String cardNumber,
       required String cardHolder,
       required String cardExpiration }) {
@@ -82,8 +114,8 @@ class CreditCardsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: Text(
-                '$cardNumber',
-                style: TextStyle(
+                cardNumber,
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 21,
                     fontFamily: 'CourrierPrime'),
@@ -124,26 +156,26 @@ class CreditCardsPage extends StatelessWidget {
     );
   }
 
-// Build Column containing the cardholder and expiration information
+  // Build Column containing the cardholder and expiration information
   Column _buildDetailsBlock({required String label, required String value}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          '$label',
-          style: TextStyle(
+          label,
+          style: const TextStyle(
               color: Colors.grey, fontSize: 9, fontWeight: FontWeight.bold),
         ),
         Text(
-          '$value',
-          style: TextStyle(
+          value,
+          style: const TextStyle(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
         )
       ],
     );
   }
 
-// Build the FloatingActionButton
+  // Build the FloatingActionButton
   Container _buildAddCardButton({
     required Icon icon,
     required Color color,
@@ -154,7 +186,7 @@ class CreditCardsPage extends StatelessWidget {
       child: FloatingActionButton(
         elevation: 2.0,
         onPressed: () {
-          print("Add a credit card");
+          // Aksi tombol (dibiarkan kosong atau hanya print untuk UI statis)
         },
         backgroundColor: color,
         mini: false,
