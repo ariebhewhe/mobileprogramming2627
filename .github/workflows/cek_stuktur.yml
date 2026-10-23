@@ -154,8 +154,8 @@ jobs:
           # Cek pengiriman pesan dari MyHome
           grep -q "arguments: \"halloo ini pesan dari screen 1\"" "$FILE_MAIN" || { echo "❌ Argumen pesan tidak dikirim dengan benar dari MyHome!"; exit 1; }
           # Cek penerimaan dan tampilan pesan di LayarKeduaPisah
-          grep -q "final String pesan = receivedMessage ?? 'Tidak ada pesan';" "$FILE_LAYAR" || { echo "❌ Pesan tidak diterima dengan benar di LayarKeduaPisah!"; exit 1; }
-          grep -q "Text(\"Ini screen kedua pisah, ada Pesan: \$pesan\")" "$FILE_LAYAR" || { echo "❌ Pesan tidak ditampilkan dengan benar di LayarKeduaPisah!"; exit 1; }
+          grep -Fq "final String receivedMessage = ModalRoute.of(context)!.settings.arguments as String? ?? 'Tidak ada pesan';" "$FILE_LAYAR" || { echo "❌ Pesan tidak diterima dengan benar dari arguments di LayarKeduaPisah!"; exit 1; }
+          grep -Fq 'Ini screen kedua pisah, ada Pesan: $receivedMessage' "$FILE_LAYAR" || { echo "❌ Pesan tidak ditampilkan dengan benar di LayarKeduaPisah!"; exit 1; }
           echo "✅ Passing Parameter Pesan sudah tervalidasi."
 
       - name: 12. Validasi Named Routes pada MyApp
