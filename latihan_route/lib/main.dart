@@ -39,7 +39,7 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test Route'), // Judul AppBar MyHome
+        title: const Text('Test Routes'), // Judul AppBar MyHome
       ),
       body: Center(
         child: Column(
