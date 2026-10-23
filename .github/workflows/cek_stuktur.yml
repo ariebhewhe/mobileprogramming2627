@@ -1,49 +1,53 @@
-name: Cek Struktur File 
+name: Cek Struktur File
 
-on: 
+on:
     push:
         branches: [ "route" ]
     pull_request:
         branches: [ "route" ]
 
-
 jobs:
-  cek-struktur-dan-widget:
+  validate-flutter-app:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Cek Keberadaan File
         run: |
-          echo "Mengecek struktur file  gitS/lib/..."
-          
-          # Cek file main.dart
+          echo "Mengecek struktur file latihan_route/lib/..."
           if [ ! -f "latihan_route/lib/main.dart" ]; then 
             echo "❌ File main.dart tidak ditemukan!"
             exit 1
           fi
-          
-          
+          if [ ! -f "latihan_route/lib/layarkeduapisah.dart" ]; then 
+            echo "❌ File layarkeduapisah.dart tidak ditemukan!"
+            exit 1
+          fi
           echo "✅ Semua file wajib ditemukan."
-      - name: 1. Cek Implementasi LayarKedua
-        run: |
-          echo "Mengecek LayarKedua di seluruh file .dart..."
+      - name: 1. Cek Implementasi LayarKedua # Nama langkah: Mengecek implementasi LayarKedua
+        run: | # Menjalankan perintah-perintah shell
+          echo "Mengecek LayarKedua di seluruh file .dart..." # Menampilkan pesan di log
+          # Mencari string "class LayarKedua extends StatelessWidget" di semua file .dart di folder lib/
           grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/*.dart || { echo "❌ Class LayarKedua tidak ditemukan!"; exit 1; }
+          # Mencari string "AppBar" di semua file .dart di folder lib/
           grep -q "AppBar" latihan_route/lib/*.dart || { echo "❌ AppBar pada LayarKedua tidak ditemukan!"; exit 1; }
+          # Mencari string "Ini Screen 2" di semua file .dart di folder lib/
           grep -q "Ini Screen 2" latihan_route/lib/*.dart || { echo "❌ Teks judul 'Ini Screen 2' tidak ditemukan!"; exit 1; }
+          # Mencari string "screen kedua, tap icon back di app bar" di semua file .dart di folder lib/
           grep -q "screen kedua, tap icon back di app bar" latihan_route/lib/*.dart || { echo "❌ Teks pada body LayarKedua tidak ditemukan!"; exit 1; }
-          echo "✅ Implementasi LayarKedua sudah sesuai."
-      - name: 2. Cek fungsi main() di main.dart
-        run: |
-          FILE="latihan_route/lib/main.dart"
-          echo "Mengecek fungsi main..."
+          echo "✅ Implementasi LayarKedua sudah sesuai." # Jika semua ditemukan, tampilkan sukses
+      - name: 2. Cek fungsi main() di main.dart # Nama langkah: Mengecek fungsi main() di main.dart
+        run: | # Menjalankan perintah-perintah shell
+          FILE="latihan_route/lib/main.dart" # Mendefinisikan variabel FILE untuk path main.dart
+          echo "Mengecek fungsi main..." # Menampilkan pesan di log
+          # Mencari string "void main()" di file main.dart
           grep -q "void main()" "$FILE" || { echo "❌ Fungsi void main() tidak ditemukan di main.dart!"; exit 1; }
+          # Mencari string "runApp(const MyApp())" di file main.dart
           grep -q "runApp(const MyApp())" "$FILE" || { echo "❌ Pemanggilan runApp(const MyApp()) tidak ditemukan!"; exit 1; }
-          
-          echo "✅ Fungsi main() sudah sesuai."
-      - name: 3. cek class MyApp()
+          echo "✅ Fungsi main() sudah sesuai." # Jika semua ditemukan, tampilkan sukses
+      - name: 3. Cek class MyApp()
         run: |
           FILE="latihan_route/lib/main.dart"
           echo "Mengecek class MyApp di $FILE..."
@@ -54,35 +58,39 @@ jobs:
           # Memastikan properti home: TIDAK ADA
           grep -q "home:" "$FILE" && { echo "❌ Properti 'home:' masih ditemukan di MaterialApp! Harap hapus."; exit 1; }
           echo "✅ Class MyApp dan konfigurasi routing sudah sesuai."
-      - name: 4. cek class MyHome()
+
+      - name: 4. Cek class MyHome()
         run: |
           FILE="latihan_route/lib/main.dart"
-          
           echo "Mengecek class MyHome di $FILE..."
           grep -q "class MyHome extends StatelessWidget" "$FILE" || { echo "❌ Class MyHome tidak ditemukan atau bukan StatelessWidget!"; exit 1; }
           grep -q "AppBar" "$FILE" || { echo "❌ AppBar tidak ditemukan di MyHome!"; exit 1; }
-          grep -q "Test Routes" "$FILE" || { echo "❌ Judul 'Test Routes' di AppBar MyHome tidak ditemukan!"; exit 1; }
-          grep -q "Ke Screen Kedua (Tanpa Data)" "$FILE" || { echo "❌ Tombol 'Ke screen Kedua (Tanpa Data)' tidak ditemukan di MyHome!";} exit 1; }
-          grep -q "Ke Screen Kedua (Dengan Data)" "$FILE" || { echo "❌ Tombol 'Ke screen Kedua (Dengan Data)' tidak ditemukan di MyHome!";} exit 1; }
+          grep -q "Test Route" "$FILE" || { echo "❌ Judul 'Test Route' di AppBar MyHome tidak ditemukan!"; exit 1; }
+          grep -q "Ke screen Kedua (Tanpa Data)" "$FILE" || { echo "❌ Tombol 'Ke screen Kedua (Tanpa Data)' tidak ditemukan di MyHome!"; exit 1; }
+          grep -q "Ke screen Kedua (Dengan Data)" "$FILE" || { echo "❌ Tombol 'Ke screen Kedua (Dengan Data)' tidak ditemukan di MyHome!"; exit 1; }
           echo "✅ Class MyHome dan tombol-tombol navigasi sudah sesuai."
+
       - name: 5. Install Dependencies
         run: |
           echo "Menginstal dependensi Flutter..."
           flutter pub get || { echo "❌ Gagal menginstal dependensi!"; exit 1; }
           echo "✅ Dependensi terinstal."
+
       - name: 6. Uji Kompilasi Web (Pengganti flutter run)
         run: |
-          echo "Menginstal dependensi Flutter..."
+          echo "Menguji kompilasi aplikasi untuk web..."
           flutter build web --release --no-pub --suppress-analytics || { echo "❌ Kompilasi aplikasi gagal!"; exit 1; }
-          echo "✅ Kompilasi Aplikasi Berhasil."
-      - name: 7. Meningkatkan modularitas, class LayarKedua dipisahkan
+          echo "✅ Kompilasi aplikasi berhasil."
+
+      - name: 7. Meningkatkan modularitas, class layarKedua dipisahkan
         run: |
-          echo "Memastikan modularitas dengan pemisahan class LayarKedua..."
+          echo "Memastikan modularitas dengan pemisahan class layarKedua..."
           # Memastikan LayarKeduaPisah ada di file terpisah
           grep -q "class LayarKeduaPisah extends StatelessWidget" latihan_route/lib/layarkeduapisah.dart || { echo "❌ Class LayarKeduaPisah tidak ditemukan di layarkeduapisah.dart!"; exit 1; }
           # Memastikan LayarKedua (lama) TIDAK ada di main.dart
-          grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/main.dart || { echo "❌ Class LayarKedua masih ditemukan di main.dart! Harap hapus.";} exit 1; }
+          grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/main.dart && { echo "❌ Class LayarKedua masih ditemukan di main.dart! Harap hapus."; exit 1; }
           echo "✅ Modularitas dengan pemisahan class sudah diterapkan."
+
       - name: 8. Cek file layarkeduapisah.dart
         run: |
           FILE="latihan_route/lib/layarkeduapisah.dart"
@@ -92,23 +100,26 @@ jobs:
           grep -q "AppBar" "$FILE" || { echo "❌ AppBar tidak ditemukan di LayarKeduaPisah!"; exit 1; }
           grep -q "Ini Screen 2" "$FILE" || { echo "❌ Judul 'Ini Screen 2' di AppBar LayarKeduaPisah tidak ditemukan!"; exit 1; }
           echo "✅ Struktur dasar layarkeduapisah.dart sudah sesuai."
+
       - name: 9. Validasi MyHome dan Routing Navigasi
         run: |
           FILE="latihan_route/lib/main.dart"
-          echo "Memvalidasi navigasi dari MyHome"
+          echo "Memvalidasi navigasi dari MyHome..."
           # Cek tombol pertama (tanpa data)
           grep -q "Navigator.pushNamed(context, '/layar2');" "$FILE" || { echo "❌ Navigasi tombol 'Tanpa Data' ke '/layar2' tidak ditemukan!"; exit 1; }
-           # Cek tombol kedua (dengan data)
-          grep -q "Navigator.pushNamed(context, '/layar2', arguments: \"hallo ini pesan dari screen1\");" "$FILE" || { echo "❌ Navigasi tombol 'Dengan Data' ke '/layar2' dengan argumen tidak ditemukan!"; exit 1; }
+          # Cek tombol kedua (dengan data)
+          grep -q "Navigator.pushNamed(context, '/layar2', arguments: \"halloo ini pesan dari screen 1\");" "$FILE" || { echo "❌ Navigasi tombol 'Dengan Data' ke '/layar2' dengan argumen tidak ditemukan atau salah!"; exit 1; }
           echo "✅ MyHome dan Routing Navigasi sudah tervalidasi."
+
       - name: 10. Validasi Struktur layarkeduapisah.dart (Konten)
         run: |
           FILE="latihan_route/lib/layarkeduapisah.dart"
           echo "Memvalidasi konten LayarKeduaPisah..."
           grep -q "ModalRoute.of(context)?.settings.arguments as String?;" "$FILE" || { echo "❌ Pengambilan argumen dari ModalRoute tidak ditemukan!"; exit 1; }
-          grep -q "final String pesan = receivedMessage ?? 'Tidak ada pesan';" "$FILE" || { echo "❌ Penanganan pesan tidak ditemukan atau salah!"; exit 1; }
-          grep -q "Text(\"Ini screen kedua pisan, ada Pesan: \$pesan\")" "$FILE" || { echo "❌ Teks tampilan pesan di LayarKeduaPisah tidak ditemukan atau salah!"; exit 1; }
+          grep -q "final String pesan = receivedMessage ?? 'Tidak ada pesan';" "$FILE" || { echo "❌ Penanganan pesan default tidak ditemukan atau salah!"; exit 1; }
+          grep -q "Text(\"Ini screen kedua pisah, ada Pesan: \$pesan\")" "$FILE" || { echo "❌ Teks tampilan pesan di LayarKeduaPisah tidak ditemukan atau salah!"; exit 1; }
           echo "✅ Struktur konten layarkeduapisah.dart sudah tervalidasi."
+
       - name: 11. Validasi Passing Parameter Pesan ke LayarKeduaPisah
         run: |
           FILE_MAIN="latihan_route/lib/main.dart"
@@ -120,6 +131,7 @@ jobs:
           grep -q "final String pesan = receivedMessage ?? 'Tidak ada pesan';" "$FILE_LAYAR" || { echo "❌ Pesan tidak diterima dengan benar di LayarKeduaPisah!"; exit 1; }
           grep -q "Text(\"Ini screen kedua pisah, ada Pesan: \$pesan\")" "$FILE_LAYAR" || { echo "❌ Pesan tidak ditampilkan dengan benar di LayarKeduaPisah!"; exit 1; }
           echo "✅ Passing Parameter Pesan sudah tervalidasi."
+
       - name: 12. Validasi Named Routes pada MyApp
         run: |
           FILE="latihan_route/lib/main.dart"
