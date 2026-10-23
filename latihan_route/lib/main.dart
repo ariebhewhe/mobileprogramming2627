@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_route/layarkeduapisah.dart';
 
-// Hapus Class LayarKedua
-class LayarKedua extends StatelessWidget {
+class LayarKedua extends StatelessWidget ({
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -13,8 +12,7 @@ class LayarKedua extends StatelessWidget {
       body: Center(child: Text("Ini screen kedua, tap icon back di app bar")),
     );
   }
-}
-// Hapus Class LayarKedua
+})
 
 void main() {
   runApp(const MyApp());
