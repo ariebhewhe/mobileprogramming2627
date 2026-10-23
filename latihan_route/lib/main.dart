@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:latihan_route/layarkeduapisah.dart';
 
 // >>> MENGHAPUS CLASS LAYARKEDUA <<<
-//class LayarKedua extends StatelessWidget {
+//LayarKedua extends StatelessWidget {
 //  @override
 //  Widget build(BuildContext context) {
 //    // TODO: implement build
